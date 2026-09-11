@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import technologies from "./data/technologies.json";
 import TechnologyCard from "./components/TechnologyCard";
 import YourStack from "./components/YourStack";
@@ -11,20 +13,30 @@ function App() {
     const alreadyExists = stack.some((item) => item.id === technology.id);
 
     if (alreadyExists) {
-      alert(`${technology.name} is already in your stack!`);
+      toast.warning(`${technology.name} is already in your stack!`);
       return;
     }
 
     setStack((previousStack) => [...previousStack, technology]);
+    toast.success(`${technology.name} added to your stack!`);
   };
 
   const handleRemove = (id) => {
+    const removed = stack.find((technology) => technology.id === id);
+
     setStack((previousStack) =>
       previousStack.filter((technology) => technology.id !== id)
     );
+
+    if (removed) {
+      toast.info(`${removed.name} removed from your stack.`);
+    }
   };
 
   const handleRemoveAll = () => {
+    if (stack.length > 0) {
+      toast.info("Your stack has been cleared.");
+    }
     setStack([]);
   };
 
@@ -125,6 +137,8 @@ function App() {
           </div>
         </section>
       </main>
+
+      <ToastContainer position="top-right" autoClose={2500} />
     </div>
   );
 }
