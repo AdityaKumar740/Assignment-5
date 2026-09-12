@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import logoText from "./assets/logo-text.png";
+import bannerStack from "./assets/banner-stack.png";
 import technologiesData from "./data/technologies.json";
 import TechnologyCard from "./components/TechnologyCard";
 import YourStack from "./components/YourStack";
@@ -80,7 +82,7 @@ function App() {
           </button>
 
           <a href="#" className="hidden md:flex md:items-center">
-            <img className="block h-auto w-33" src="/src/assets/logo-text.png" alt="Dev Stack Logo" />
+            <img className="block h-auto w-33" src={logoText} alt="Dev Stack Logo" />
           </a>
 
           <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-3">
@@ -134,7 +136,7 @@ function App() {
             <div className="flex items-center justify-center">
               <img
                 className="block h-auto w-72 max-w-full md:w-107.5"
-                src="/src/assets/banner-stack.png"
+                src={bannerStack}
                 alt="Development Stack"
               />
             </div>
