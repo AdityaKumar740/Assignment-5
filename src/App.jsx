@@ -73,34 +73,29 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#11182d]">
-      <header className="sticky top-0 z-50 h-20 w-full border-b border-[#edf0f5] bg-white">
-        <div className="relative mx-auto flex h-full max-w-6xl items-center justify-between px-4 md:px-0">
-          <button className="flex h-7 w-7 flex-col justify-center gap-1.5 border-none bg-transparent md:hidden">
-            <span className="block h-0.5 w-5 rounded bg-[#17213b]"></span>
-            <span className="block h-0.5 w-5 rounded bg-[#17213b]"></span>
-            <span className="block h-0.5 w-5 rounded bg-[#17213b]"></span>
+      <header className="sticky top-0 z-50 h-19 w-full border-b border-[#edf0f5] bg-white">
+        <div className="relative mx-auto flex h-full max-w-6xl items-center justify-between">
+          <button className="hidden h-6.25 w-6.25 flex-col justify-center gap-1 border-none bg-transparent">
+            <span className="block h-0.5 w-5 bg-[#17213b]"></span>
+            <span className="block h-0.5 w-5 bg-[#17213b]"></span>
+            <span className="block h-0.5 w-5 bg-[#17213b]"></span>
           </button>
 
-          <a href="#" className="hidden md:flex md:items-center">
+          <a href="#" className="brand flex items-center">
             <img className="block h-auto w-33" src={logoText} alt="Dev Stack Logo" />
           </a>
 
-          <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-md bg-linear-to-r from-[#7d2cf0] to-[#df1680] text-[18px] font-extrabold text-white shadow-sm">
-              DS
-            </span>
-            <span className="text-[23px] font-extrabold tracking-[-1px] text-[#111827]">
-              DevStack
-            </span>
-          </div>
+          <nav className="ml-auto mr-61.25 flex items-center gap-7.5">
+            <a href="#" className="text-sm font-normal text-[#df1680] transition hover:text-[#df1680]">Home</a>
+            <a href="#technologies" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">Technologies</a>
+            <a href="#projects" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">Projects</a>
+            <a href="#about" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">About</a>
+            <a href="#contact" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">Contact</a>
+          </nav>
 
-          <div className="flex items-center gap-3 md:gap-5">
-            <button className="border-none bg-transparent text-[16px] font-semibold text-[#17213b] transition hover:text-[#df1680]">
-              Sign In
-            </button>
-            <button className="h-10 rounded-full border-none bg-linear-to-r from-[#ff681c] to-[#df1680] px-5 text-[16px] font-semibold text-white shadow-sm transition hover:opacity-90">
-              Sign Up
-            </button>
+          <div className="auth-buttons absolute right-0 flex items-center gap-5">
+            <button className="border-none bg-transparent text-sm text-[#17213b]">Sign In</button>
+            <button className="h-10.25 rounded-full border-none bg-[#df1680] px-5.75 text-sm font-medium text-white transition hover:bg-[#c91070]">Sign Up</button>
           </div>
         </div>
       </header>
