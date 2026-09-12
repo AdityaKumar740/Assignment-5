@@ -100,9 +100,9 @@ function App() {
 
       <main>
         <section className="flex min-h-[calc(100vh-76px)] items-center bg-white">
-          <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center gap-12.5">
-            <div className="pb-5">
-              <h1 className="max-w-137.5 text-5xl font-extrabold leading-none tracking-[-2.5px] text-[#10172d]">
+          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-4 md:grid-cols-2 md:gap-12.5 lg:px-0">
+            <div className="pb-5 text-center md:text-left">
+              <h1 className="max-w-137.5 text-4xl font-extrabold leading-none tracking-[-2.5px] text-[#10172d] md:text-5xl">
                 Build Your Ideal
                 <span className="mt-1.25 block bg-linear-to-r from-[#ff591f] via-[#e52291] to-[#8b31d9] bg-clip-text text-transparent">
                   Development Stack
@@ -115,7 +115,7 @@ function App() {
                 fits your next project.
               </p>
 
-              <div className="mt-12.25 flex items-center gap-2.75">
+              <div className="mt-12.25 flex flex-wrap items-center justify-center gap-2.75 md:justify-start">
                 <button className="h-10.25 rounded-md border-none bg-linear-to-r from-[#ff681c] to-[#ed278c] px-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5">
                   Explore Technologies
                 </button>
@@ -128,7 +128,7 @@ function App() {
 
             <div className="flex items-center justify-center">
               <img
-                className="block h-auto w-107.5 max-w-full"
+                className="block h-auto w-72 max-w-full md:w-107.5"
                 src="/src/assets/banner-stack.png"
                 alt="Development Stack"
               />
@@ -148,10 +148,10 @@ function App() {
               </p>
             </header>
 
-            <div className="mt-9.25 grid grid-cols-[minmax(0,1fr)_250px] gap-7 items-start">
+            <div className="mt-9.25 grid grid-cols-1 gap-7 items-start md:grid-cols-[minmax(0,1fr)_250px]">
               {isLoading ? (
-                <section className="grid min-h-60 w-full grid-cols-3 gap-4.25">
-                  <div className="col-span-3 flex min-h-60 items-center justify-center rounded-xl border border-[#e8edf3] bg-white shadow-sm">
+                <section className="grid min-h-60 w-full grid-cols-1 gap-4.25 md:grid-cols-3">
+                  <div className="md:col-span-3 flex min-h-60 items-center justify-center rounded-xl border border-[#e8edf3] bg-white shadow-sm">
                     <div className="flex items-center gap-3 text-[15px] font-semibold text-[#172036]">
                       <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#df1680] border-t-transparent"></span>
                       <span>Loading technologies...</span>
@@ -159,7 +159,7 @@ function App() {
                   </div>
                 </section>
               ) : (
-                <section className="grid grid-cols-3 gap-4.25">
+                <section className="grid grid-cols-1 gap-4.25 md:grid-cols-2 xl:grid-cols-3">
                   {technologies.map((technology) => (
                     <TechnologyCard
                       key={technology.id}
