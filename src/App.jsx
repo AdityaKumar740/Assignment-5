@@ -1,12 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import technologies from "./data/technologies.json";
+import technologiesData from "./data/technologies.json";
 import TechnologyCard from "./components/TechnologyCard";
 import YourStack from "./components/YourStack";
 
 function App() {
   const [stack, setStack] = useState([]);
+  const [technologies, setTechnologies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadTechnologies = async () => {
+      setIsLoading(true);
+
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 250));
+
+        if (isMounted) {
+          setTechnologies(technologiesData);
+        }
+      } catch {
+        toast.error("Unable to load technologies.");
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadTechnologies();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleAdd = (technology) => {
     const alreadyExists = stack.some((item) => item.id === technology.id);
@@ -119,16 +149,27 @@ function App() {
             </header>
 
             <div className="mt-9.25 grid grid-cols-[minmax(0,1fr)_250px] gap-7 items-start">
-              <section className="grid grid-cols-3 gap-4.25">
-                {technologies.map((technology) => (
-                  <TechnologyCard
-                    key={technology.id}
-                    technology={technology}
-                    isSelected={stack.some((item) => item.id === technology.id)}
-                    onAdd={handleAdd}
-                  />
-                ))}
-              </section>
+              {isLoading ? (
+                <section className="grid min-h-60 w-full grid-cols-3 gap-4.25">
+                  <div className="col-span-3 flex min-h-60 items-center justify-center rounded-xl border border-[#e8edf3] bg-white shadow-sm">
+                    <div className="flex items-center gap-3 text-[15px] font-semibold text-[#172036]">
+                      <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#df1680] border-t-transparent"></span>
+                      <span>Loading technologies...</span>
+                    </div>
+                  </div>
+                </section>
+              ) : (
+                <section className="grid grid-cols-3 gap-4.25">
+                  {technologies.map((technology) => (
+                    <TechnologyCard
+                      key={technology.id}
+                      technology={technology}
+                      isSelected={stack.some((item) => item.id === technology.id)}
+                      onAdd={handleAdd}
+                    />
+                  ))}
+                </section>
+              )}
 
               <YourStack
                 stack={stack}
@@ -140,8 +181,118 @@ function App() {
         </section>
       </main>
 
+      <Footer />
+
       <ToastContainer position="top-right" autoClose={2500} />
     </div>
+  );
+}
+
+function Footer() {
+  return (
+    <>
+      <footer className="hidden w-full border-t border-[#d8dce7] bg-white py-8 md:block">
+        <div className="mx-auto max-w-300 px-8">
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr] gap-10">
+            <div className="flex flex-col justify-start">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-md bg-linear-to-r from-[#8b5cf6] to-[#df1680] text-[14px] font-bold text-white shadow-sm">
+                  DS
+                </span>
+                <span className="text-[30px] font-bold tracking-[-1px] text-[#111827]">
+                  Dev Stack
+                </span>
+              </div>
+
+              <p className="mt-6 max-w-105 text-[16px] leading-normal text-[#556073]">
+                Curated tools, technologies, and resources for developers building modern software.
+              </p>
+
+              <div className="mt-7 flex items-center gap-6 text-[16px] font-semibold text-[#46536b]">
+                <a href="#" className="transition hover:text-[#df1680]">GitHub</a>
+                <span className="text-[#a0a8b8]">•</span>
+                <a href="#" className="transition hover:text-[#df1680]">Twitter</a>
+                <span className="text-[#a0a8b8]">•</span>
+                <a href="#" className="transition hover:text-[#df1680]">LinkedIn</a>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <h3 className="mb-4 text-[12px] font-bold uppercase tracking-[0.08em] text-[#6b7387]">
+                Product
+              </h3>
+              <ul className="space-y-3 text-[16px] text-[#576173]">
+                <li><a className="transition hover:text-[#df1680]" href="#">Home</a></li>
+                <li><a className="transition hover:text-[#df1680]" href="#technologies">Technologies</a></li>
+                <li><a className="transition hover:text-[#df1680]" href="#projects">Projects</a></li>
+              </ul>
+            </div>
+
+            <div className="pt-2">
+              <h3 className="mb-4 text-[12px] font-bold uppercase tracking-[0.08em] text-[#6b7387]">
+                Company
+              </h3>
+              <ul className="space-y-3 text-[16px] text-[#576173]">
+                <li><a className="transition hover:text-[#df1680]" href="#about">About</a></li>
+                <li><a className="transition hover:text-[#df1680]" href="#contact">Contact</a></li>
+                <li><a className="transition hover:text-[#df1680]" href="#careers">Careers</a></li>
+              </ul>
+            </div>
+
+            <div className="pt-2">
+              <h3 className="mb-4 text-[12px] font-bold uppercase tracking-[0.08em] text-[#6b7387]">
+                Legal
+              </h3>
+              <ul className="space-y-3 text-[16px] text-[#576173]">
+                <li><a className="transition hover:text-[#df1680]" href="#privacy">Privacy Policy</a></li>
+                <li><a className="transition hover:text-[#df1680]" href="#terms">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 flex items-center justify-between border-t border-[#d8dce7] pt-5">
+            <span className="text-[14px] text-[#64728a]">© 2026 Dev Stack. All rights reserved.</span>
+            <div className="flex gap-8 text-[14px] text-[#64728a]">
+              <a className="transition hover:text-[#df1680]" href="#privacy">Privacy</a>
+              <a className="transition hover:text-[#df1680]" href="#terms">Terms</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <footer className="block w-full border-t border-[#d8dce7] bg-white py-8 md:hidden">
+        <div className="mx-auto max-w-120 px-6">
+          <div className="flex items-center justify-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-md bg-linear-to-r from-[#8b5cf6] to-[#df1680] text-[14px] font-bold text-white shadow-sm">
+              DS
+            </span>
+            <span className="text-[30px] font-bold tracking-[-1px] text-[#111827]">
+              Dev Stack
+            </span>
+          </div>
+
+          <p className="mt-6 text-center text-[16px] leading-normal text-[#556073]">
+            Curated tools, technologies, and resources for developers building modern software.
+          </p>
+
+          <div className="mt-6 flex items-center justify-center gap-6 text-[16px] font-semibold text-[#46536b]">
+            <a href="#" className="transition hover:text-[#df1680]">GitHub</a>
+            <span className="text-[#a0a8b8]">•</span>
+            <a href="#" className="transition hover:text-[#df1680]">Twitter</a>
+            <span className="text-[#a0a8b8]">•</span>
+            <a href="#" className="transition hover:text-[#df1680]">LinkedIn</a>
+          </div>
+
+          <div className="mt-7 flex items-center justify-between border-t border-[#d8dce7] pt-5">
+            <span className="text-[14px] text-[#64728a]">© 2026 Dev Stack. All rights reserved.</span>
+            <div className="flex gap-6 text-[14px] text-[#64728a]">
+              <a className="transition hover:text-[#df1680]" href="#privacy">Privacy</a>
+              <a className="transition hover:text-[#df1680]" href="#terms">Terms</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
 
