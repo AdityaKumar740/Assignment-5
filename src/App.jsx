@@ -73,29 +73,34 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#11182d]">
-      <header className="sticky top-0 z-50 h-19 w-full border-b border-[#edf0f5] bg-white">
-        <div className="relative mx-auto flex h-full max-w-6xl items-center justify-between">
-          <button className="hidden h-6.25 w-6.25 flex-col justify-center gap-1 border-none bg-transparent">
-            <span className="block h-0.5 w-5 bg-[#17213b]"></span>
-            <span className="block h-0.5 w-5 bg-[#17213b]"></span>
-            <span className="block h-0.5 w-5 bg-[#17213b]"></span>
+      <header className="site-header">
+        <div className="site-header__inner">
+          <button className="mobile-menu" aria-label="Open navigation">
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
 
-          <a href="#" className="brand flex items-center">
-            <img className="block h-auto w-33" src={logoText} alt="Dev Stack Logo" />
+          <a href="#" className="brand brand--desktop">
+            <img className="brand__image" src={logoText} alt="Dev Stack Logo" />
           </a>
 
-          <nav className="ml-auto mr-61.25 flex items-center gap-7.5">
-            <a href="#" className="text-sm font-normal text-[#df1680] transition hover:text-[#df1680]">Home</a>
-            <a href="#technologies" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">Technologies</a>
-            <a href="#projects" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">Projects</a>
-            <a href="#about" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">About</a>
-            <a href="#contact" className="text-sm font-normal text-[#34415d] transition hover:text-[#df1680]">Contact</a>
+          <a href="#" className="brand brand--mobile">
+            <span className="brand__icon">DS</span>
+            <span className="brand__wordmark">DevStack</span>
+          </a>
+
+          <nav className="desktop-nav">
+            <a href="#" className="desktop-nav__link desktop-nav__link--active">Home</a>
+            <a href="#technologies" className="desktop-nav__link">Technologies</a>
+            <a href="#projects" className="desktop-nav__link">Projects</a>
+            <a href="#about" className="desktop-nav__link">About</a>
+            <a href="#contact" className="desktop-nav__link">Contact</a>
           </nav>
 
-          <div className="auth-buttons absolute right-0 flex items-center gap-5">
-            <button className="border-none bg-transparent text-sm text-[#17213b]">Sign In</button>
-            <button className="h-10.25 rounded-full border-none bg-[#df1680] px-5.75 text-sm font-medium text-white transition hover:bg-[#c91070]">Sign Up</button>
+          <div className="auth-buttons">
+            <button className="auth-buttons__sign-in">Sign In</button>
+            <button className="auth-buttons__sign-up">Sign Up</button>
           </div>
         </div>
       </header>
